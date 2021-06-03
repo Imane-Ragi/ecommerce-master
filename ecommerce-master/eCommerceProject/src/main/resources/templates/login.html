@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="icon" type="image/png" th:href="@{/images/logo.png}" sizes="32x32">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+	
+</head>
+<body>
+
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+	<form th:action="@{/login}" method="POST" class="form-signin">
+			<h1>Se connecter</h1><br>
+			<input type="text" name="usrname"  th:placeholder="Username"	 />
+			<input type="password"  name="passwd" th:placeholder="Password"  />
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Nom d'utilisateur ou mot de passe incorrecte</p>
+			</div><br>
+			<button type="Submit">Se connecter</button>
+		</form>
+		
+	</div>
+	<div class="form-container sign-in-container">
+		<form th:action="@{/createAccount}" method="POST" th:object="${clientVo}">
+			<h1>Créer votre compte</h1><br>
+		    <input type="text" th:field="*{nom}"  name="nom" th:placeholder="nom" required/> 
+			<input type="text" th:field="*{prenom}"  name="prenom" th:placeholder="prenom" required/> 
+			<input type="text" th:field="*{username}"  name="username" th:placeholder="username" required/> 
+				 <p style="margin-top: 0px; margin-bottom:2px;" th:if="${UsernameException}"><span style="color: #FF1C19;" th:utext="${UsernameException}"></span></p>
+			
+			<input type="password" th:field="*{password}"  name="password" th:placeholder="password" required/> 
+			<input type="email" th:field="*{email}"  name="email" th:placeholder="Email" required/>
+			 	 <p style="margin-top: 0px; margin-bottom:2px; "  th:if="${EmailException}"><span style="color: #FF1C19;" th:utext="${EmailException}"></span></p>
+			
+			<input type="text" th:field="*{ville}"  name="ville" th:placeholder="Ville" required/>
+			<input type="text" th:field="*{tel}"  name="tel" th:placeholder="Téléphone" required/> 
+			<button type="Submit" >S'inscrire</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>ReBonjour</h1>
+				<p>Pour ce connecter, merci de saisir vos identifiants </p>
+				<button class="ghost" id="signIn">Se connecter</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Bienvenue</h1>
+				<p>Pour accéder à l'application, merci de vous inscrire </p>
+				<button class="ghost" id="signUp">S'inscrire</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- partial -->
+  <script type="text/javascript" th:src="@{/js/login.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+<title>Ajouter un article</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/listArticles.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+<link rel="icon" type="image/png" th:href="@{/images/logo.png}" sizes="32x32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<!-- START NAVIGATION BAR -->
+<div class="container">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-left logo">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						viewBox="0 0 291 385.3"
+						style="enable-background: new 0 0 291 385.3;" xml:space="preserve">
+              					<style type="text/css">
+									.st0 {
+										fill: rgb(255,162,145);
+									    
+										}
+								</style>
+						<polygon class="st0" points="82.1,12 7.4,138.7 38.7,237.3 " />
+						<polygon class="st0" points="92.7,5.3 199.4,8.7 223.4,82.7 " />
+						<polygon class="st0" points="89.4,8.7 223.4,86.7 42.1,237.3 " />
+						<polygon class="st0" points="206.1,15.3 262.7,66 228.1,82.7 " />
+						<polygon class="st0" points="262.7,70 228.1,86 266.4,175.3 " />
+						<polygon class="st0" points="228.1,92.7 262.7,179.3 173.4,328 " />
+						<polygon class="st0" points="223.4,92.7 44.7,240 167.7,336 " />
+						<polygon class="st0" points="252.1,210.3 184.4,380.3 170.7,339.7 " />
+						<polygon class="st0" points="60.1,260.3 167.4,341 180.4,380.3 " />
+					</svg>
+				</div>
+				<h1 class="brand brand-name navbar-left">
+					<div class="navbar-left" style="color: black">IMAF-Prod</div>
+				</h1>
+			</div>
+			<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="/admin/articles/list"><b>Liste Articles</b></a></li>
+					<li><a href="/admin/articles/newArticle"><b>Ajouter un article</b></a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/logout">Se déconnecter</a></li>
+
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	</div>
+	<br><br><br><br><br><br><br>
+<!-- END NAVIGATION BAR  -->
+
+<div class="container">
+
+		<div class="row">
+		
+			<div class=" col-sm-12 mt-2">
+				<div class="panel panel-default ">
+					<div class="panel-heading"> <i class="fas fa-keyboard mr-05"></i>  <b> Ajouter un article</b></div>
+					<div class="panel-body">
+					
+				
+
+						<form th:action="@{/admin/articles/Save}" method="POST" class="form-signin" th:object="${articleVo}">
+														
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">Reference</label>
+								<div class="col-sm-8">
+									<input th:field="*{reference}" type="text"  name="reference"  th:placeholder="reference" class="form-control" required="required"/>
+									 <p style="margin-top: 0px; margin-bottom:2px; "  th:if="${referenceException}"><span style="color: #FF1C19;" th:utext="${referenceException}"></span></p><br>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">Designation</label>
+								<div class="col-sm-8">
+									<input th:field="*{designation}" type="text"  name="designation"  th:placeholder="designation" class="form-control" required="required"/>
+									 <p style="margin-top: 0px; margin-bottom:2px; "  th:if="${designationException}"><span style="color: #FF1C19;" th:utext="${designationException}"></span></p><br>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">Prix unitaire</label>
+								<div class="col-sm-8">
+										<input th:field="*{prixUnitaire}" type="text"  name="prixUnitaire"  th:placeholder="prixUnitaire" class="form-control" required="required"/>
+											<p style="margin-top: 0px; margin-bottom:2px; "  th:if="${prixUnitaireException}"><span style="color: #FF1C19;" th:utext="${prixUnitaireException}"></span></p><br>
+								</div>
+							</div>
+							<br>
+							
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">quantité en stock</label>
+								<div class="col-sm-8">
+										<input th:field="*{qtEnStock}" type="text"  name="qtEnStock"  th:placeholder="qtEnStock" class="form-control" required="required"/>
+										<span class="help-block" th:if="${#fields.hasErrors('qtEnStock')}">
+                							<p th:errors="*{qtEnStock}" style="color: #FF1C19;"></p>
+                   							</span><br>
+								</div>
+							</div>
+	
+							<center>
+	
+							<div class="form-group mt-1">
+								<div class="">
+									<a class="btn btn-info" href="/admin/articles/list"><i class="fas fa-arrow-left" aria-hidden="true"></i>
+										Retour à la liste des articles  
+									</a>
+									
+									<button type="submit" class="btn btn-success">
+										<i class="fas fa-plus-square mr-05"></i>       Ajouter l'article    
+									</button>
+								</div>
+							</div>
+								
+							</center>
+						</form>
+						
+					</div>	
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+	
+	<br><br>
+<script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js'></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+<title>Liste des articles</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/listArticles.css}" />
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+<link rel="icon" type="image/png" th:href="@{/images/logo.png}" sizes="32x32">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div class="container">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-left logo">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						viewBox="0 0 291 385.3"
+						style="enable-background: new 0 0 291 385.3;" xml:space="preserve">
+              					<style type="text/css">
+									.st0 {
+										fill: rgb(255,162,145);
+									    
+										}
+</style>
+<polygon class="st0" points="82.1,12 7.4,138.7 38.7,237.3 " />
+<polygon class="st0" points="92.7,5.3 199.4,8.7 223.4,82.7 " />
+<polygon class="st0" points="89.4,8.7 223.4,86.7 42.1,237.3 " />
+<polygon class="st0" points="206.1,15.3 262.7,66 228.1,82.7 " />
+<polygon class="st0" points="262.7,70 228.1,86 266.4,175.3 " />
+<polygon class="st0" points="228.1,92.7 262.7,179.3 173.4,328 " />
+<polygon class="st0" points="223.4,92.7 44.7,240 167.7,336 " />
+<polygon class="st0" points="252.1,210.3 184.4,380.3 170.7,339.7 " />
+<polygon class="st0" points="60.1,260.3 167.4,341 180.4,380.3 " />
+</svg>
+				</div>
+				<h1 class="brand brand-name navbar-left">
+					<div class="navbar-left" style="color: black">IMAF-Prod</div>
+				</h1>
+			</div>
+			<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="/admin/articles/list"><b>Liste Articles</b></a></li>
+					<li><a href="/admin/articles/newArticle"><b>Ajouter un article</b></a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/logout">Se déconnecter</a></li>
+
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	</div>
+	<br><br><br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<ul class="nav">
+						<li class="settings-title">
+							<h1>Liste des articles</h1>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<a href="/admin/articles/newArticle"
+					class="btn btn-primary btn-primary pull-right"><i
+					class="fas fa-plus-square fa-x mr-1"> </i> <span>  Ajouter
+						un article</span></a>
+			</div>
+		</div>
+		<br>
+		
+		<div th:if="${deleteException}" class="alert alert-danger" role="alert">
+					<Strong>Error : </Strong><span th:utext="${deleteException}"></span>
+			</div>
+			
+		<div class="row">
+			<div class="col-md-12">
+
+				<table class="table table-hover">
+					<thead>
+						<tr style="background-color: rgb(255, 162, 145);">
+							<th scope="col">Référence</th>
+							<th scope="col">Désignation</th>
+							<th scope="col">Quantité en stock</th>
+							<th scope="col">Prix unitaire</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						<tr th:each="articleVo : ${list}">
+							<td class="colonne gras" th:text="${articleVo.reference}"></td>
+							<td class="colonne" th:text="${articleVo.designation}"></td>
+							<td class="colonne" th:text="${articleVo.qtEnStock} "></td>
+							<td class="colonne" th:text="${articleVo.prixUnitaire}"></td>
+							<td><a
+								th:href="@{/admin/articles/edit/{id}(id=${articleVo.id})}"><span
+									class="fas fa-edit fa-lg" style="color: black"></span></a> <a
+								th:href="@{/admin/articles/delete/{id}(id=${articleVo.id})}"><span
+									class="fas fa-trash-alt fa-lg" style="color: black"></span></a></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js'></script>
+</body>
+</html>
